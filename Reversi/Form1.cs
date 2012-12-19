@@ -14,15 +14,23 @@ namespace Reversi
         public Form1()
         {
             InitializeComponent();
+            Text = "リバーシ";
+            ClientSize = new Size(260, 260);
+            BackColor = Color.Green;
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            e.Graphics.DrawLine(Pens.Black, 10, 10, 20, 20);
-            e.Graphics.DrawRectangle(Pens.Black, 10, 10, 20, 20);
-            e.Graphics.DrawEllipse(Pens.Blue, 10, 10, 20, 20);
-            e.Graphics.FillRectangle(Brushes.Red, 40, 10, 20, 20);
+            for (int i = 0; i <= 8; i++)
+            {
+                e.Graphics.DrawLine(Pens.Black, i * 30 + 10, 10, i * 30 + 10, 250);
+                e.Graphics.DrawLine(Pens.Black, 10, i * 30 + 10, 250, i * 30 + 10);
+            }
+            e.Graphics.FillEllipse(Brushes.White, 101, 101, 28, 28);
+            e.Graphics.FillEllipse(Brushes.Black, 131, 101, 28, 28);
+            e.Graphics.FillEllipse(Brushes.Black, 101, 131, 28, 28);
+            e.Graphics.FillEllipse(Brushes.White, 131, 131, 28, 28);
         }
     }
 }
