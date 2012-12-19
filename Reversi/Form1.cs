@@ -49,6 +49,9 @@ namespace Reversi
             }
         }
 
+        int player = 1;
+        int rival = 2;
+
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
@@ -56,36 +59,38 @@ namespace Reversi
             int y = (e.Y - 10) / 30;
             if (Check(x, y, 0))
             {
-                int c1 = 1;
-                int c2 = 2;
                 // 右
-                if (Check(x + 1, y, c2) && Check(x + 2, y, c1))
+                if (Check(x + 1, y, rival) && Check(x + 2, y, player))
                 {
-                    board[x, y] = c1;
-                    board[x + 1, y] = c1;
+                    board[x, y] = player;
+                    board[x + 1, y] = player;
                     Refresh();
                 }
                 // 左
-                if (Check(x - 1, y, c2) && Check(x - 2, y, c1))
+                if (Check(x - 1, y, rival) && Check(x - 2, y, player))
                 {
-                    board[x, y] = c1;
-                    board[x - 1, y] = c1;
+                    board[x, y] = player;
+                    board[x - 1, y] = player;
                     Refresh();
                 }
                 // 下
-                if (Check(x, y + 1, c2) && Check(x, y + 2, c1))
+                if (Check(x, y + 1, rival) && Check(x, y + 2, player))
                 {
-                    board[x, y] = c1;
-                    board[x, y + 1] = c1;
+                    board[x, y] = player;
+                    board[x, y + 1] = player;
                     Refresh();
                 }
                 // 上
-                if (Check(x, y - 1, c2) && Check(x, y - 2, c1))
+                if (Check(x, y - 1, rival) && Check(x, y - 2, player))
                 {
-                    board[x, y] = c1;
-                    board[x, y - 1] = c1;
+                    board[x, y] = player;
+                    board[x, y - 1] = player;
                     Refresh();
                 }
+                // 交替
+                int p = player;
+                player = rival;
+                rival = p;
             }
         }
 
