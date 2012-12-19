@@ -54,37 +54,42 @@ namespace Reversi
             base.OnMouseDown(e);
             int x = (e.X - 10) / 30;
             int y = (e.Y - 10) / 30;
-            if (0 <= x && x <= 7 && 0 <= y && y <= 7 && board[x, y] == 0)
+            if (Check(x, y, 0))
             {
                 // 右
-                if (board[x + 1, y] == 2 && board[x + 2, y] == 1)
+                if (Check(x + 1, y, 2) && Check(x + 2, y, 1))
                 {
                     board[x, y] = 1;
                     board[x + 1, y] = 1;
                     Refresh();
                 }
                 // 左
-                if (board[x - 1, y] == 2 && board[x - 2, y] == 1)
+                if (Check(x - 1, y, 2) && Check(x - 2, y, 1))
                 {
                     board[x, y] = 1;
                     board[x - 1, y] = 1;
                     Refresh();
                 }
                 // 下
-                if (board[x, y + 1] == 2 && board[x, y + 2] == 1)
+                if (Check(x, y + 1, 2) && Check(x, y + 2, 1))
                 {
                     board[x, y] = 1;
                     board[x, y + 1] = 1;
                     Refresh();
                 }
                 // 上
-                if (board[x, y - 1] == 2 && board[x, y - 2] == 1)
+                if (Check(x, y - 1, 2) && Check(x, y - 2, 1))
                 {
                     board[x, y] = 1;
                     board[x, y - 1] = 1;
                     Refresh();
                 }
             }
+        }
+
+        private bool Check(int x, int y, int n)
+        {
+            return 0 <= x && x <= 7 && 0 <= y && y <= 7 && board[x, y] == n;
         }
     }
 }
