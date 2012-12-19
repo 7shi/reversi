@@ -54,11 +54,15 @@ namespace Reversi
             base.OnMouseDown(e);
             int x = (e.X - 10) / 30;
             int y = (e.Y - 10) / 30;
-            if (0 <= x && x <= 7 && 0 <= y && y <= 7)
+            if (0 <= x && x <= 7 && 0 <= y && y <= 7 && board[x, y] == 0)
             {
-                board[x, y]++;
-                if (board[x, y] == 3) board[x, y] = 0;
-                Refresh();
+                // 右
+                if (board[x + 1, y] == 2 && board[x + 2, y] == 1)
+                {
+                    board[x, y] = 1;
+                    board[x + 1, y] = 1;
+                    Refresh();
+                }
             }
         }
     }
