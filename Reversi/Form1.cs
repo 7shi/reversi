@@ -67,16 +67,16 @@ namespace Reversi
             if (Check(x, y, 0))
             {
                 int put = 0;
-                put = PutStone(x, y, 1, 0, put);   // 右
-                put = PutStone(x, y, -1, 0, put);  // 左
-                put = PutStone(x, y, 0, 1, put);   // 下
-                put = PutStone(x, y, 0, -1, put);  // 上
-                put = PutStone(x, y, 1, 1, put);   // 右下
-                put = PutStone(x, y, 1, -1, put);  // 右上
-                put = PutStone(x, y, -1, 1, put);  // 左下
-                put = PutStone(x, y, -1, -1, put); // 左上
+                put += PutStone(x, y, 1, 0);   // 右
+                put += PutStone(x, y, -1, 0);  // 左
+                put += PutStone(x, y, 0, 1);   // 下
+                put += PutStone(x, y, 0, -1);  // 上
+                put += PutStone(x, y, 1, 1);   // 右下
+                put += PutStone(x, y, 1, -1);  // 右上
+                put += PutStone(x, y, -1, 1);  // 左下
+                put += PutStone(x, y, -1, -1); // 左上
                 // 交替
-                if (put == 1)
+                if (put > 0)
                 {
                     board[x, y] = player;
                     int p = player;
@@ -87,7 +87,7 @@ namespace Reversi
             }
         }
 
-        private int PutStone(int x, int y, int dx, int dy, int put)
+        private int PutStone(int x, int y, int dx, int dy)
         {
             int x1 = x + dx;
             int y1 = y + dy;
@@ -108,9 +108,12 @@ namespace Reversi
                     x2 += dx;
                     y2 += dy;
                 }
-                put = 1;
             }
-            return put;
+            else
+            {
+                stone = 0;
+            }
+            return stone;
         }
 
         private bool Check(int x, int y, int n)
