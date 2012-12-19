@@ -59,12 +59,14 @@ namespace Reversi
             int y = (e.Y - 10) / 30;
             if (Check(x, y, 0))
             {
+                int put = 0;
                 // 右
                 if (Check(x + 1, y, rival) && Check(x + 2, y, player))
                 {
                     board[x, y] = player;
                     board[x + 1, y] = player;
                     Refresh();
+                    put = 1;
                 }
                 // 左
                 if (Check(x - 1, y, rival) && Check(x - 2, y, player))
@@ -72,6 +74,7 @@ namespace Reversi
                     board[x, y] = player;
                     board[x - 1, y] = player;
                     Refresh();
+                    put = 1;
                 }
                 // 下
                 if (Check(x, y + 1, rival) && Check(x, y + 2, player))
@@ -79,6 +82,7 @@ namespace Reversi
                     board[x, y] = player;
                     board[x, y + 1] = player;
                     Refresh();
+                    put = 1;
                 }
                 // 上
                 if (Check(x, y - 1, rival) && Check(x, y - 2, player))
@@ -86,11 +90,15 @@ namespace Reversi
                     board[x, y] = player;
                     board[x, y - 1] = player;
                     Refresh();
+                    put = 1;
                 }
                 // 交替
-                int p = player;
-                player = rival;
-                rival = p;
+                if (put == 1)
+                {
+                    int p = player;
+                    player = rival;
+                    rival = p;
+                }
             }
         }
 
