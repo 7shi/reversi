@@ -115,6 +115,33 @@ namespace Reversi
             return stone;
         }
 
+        private bool CanPut()
+        {
+            for (int y = 0; y <= 7; y++)
+            {
+                for (int x = 0; x <= 7; x++)
+                {
+                    if (board[x, y] == 0)
+                    {
+                        int stone = 0;
+                        stone += CountStone(x, y, 1, 0);   // 右
+                        stone += CountStone(x, y, -1, 0);  // 左
+                        stone += CountStone(x, y, 0, 1);   // 下
+                        stone += CountStone(x, y, 0, -1);  // 上
+                        stone += CountStone(x, y, 1, 1);   // 右下
+                        stone += CountStone(x, y, 1, -1);  // 右上
+                        stone += CountStone(x, y, -1, 1);  // 左下
+                        stone += CountStone(x, y, -1, -1); // 左上
+                        if (stone > 0)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
         private bool Check(int x, int y, int n)
         {
             return 0 <= x && x <= 7 && 0 <= y && y <= 7 && board[x, y] == n;
