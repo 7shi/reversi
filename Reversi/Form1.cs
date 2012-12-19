@@ -12,6 +12,7 @@ namespace Reversi
     public partial class Form1 : Form
     {
         int[,] board = new int[8, 8];
+        string message = "";
 
         public Form1()
         {
@@ -42,6 +43,12 @@ namespace Reversi
             }
             e.Graphics.DrawString("Turn", Font, Brushes.White, 262, 235);
             DrawStone(e, player, 261, 201);
+            if (message != "")
+            {
+                e.Graphics.FillRectangle(Brushes.White, 20, 120, 220, 20);
+                e.Graphics.DrawRectangle(Pens.Red, 20, 120, 220, 20);
+                e.Graphics.DrawString(message, Font, Brushes.Black, 30, 125);
+            }
         }
 
         private static void DrawStone(PaintEventArgs e, int n, int x, int y)
@@ -86,6 +93,10 @@ namespace Reversi
                     {
                         rival = player;
                         player = p;
+                        if (!CanPut())
+                        {
+                            message = "ゲーム終了！";
+                        }
                     }
                     Refresh();
                 }
