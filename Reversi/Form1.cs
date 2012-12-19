@@ -63,41 +63,35 @@ namespace Reversi
                 // 右
                 if (Check(x + 1, y, rival) && Check(x + 2, y, player))
                 {
-                    board[x, y] = player;
                     board[x + 1, y] = player;
-                    Refresh();
                     put = 1;
                 }
                 // 左
                 if (Check(x - 1, y, rival) && Check(x - 2, y, player))
                 {
-                    board[x, y] = player;
                     board[x - 1, y] = player;
-                    Refresh();
                     put = 1;
                 }
                 // 下
                 if (Check(x, y + 1, rival) && Check(x, y + 2, player))
                 {
-                    board[x, y] = player;
                     board[x, y + 1] = player;
-                    Refresh();
                     put = 1;
                 }
                 // 上
                 if (Check(x, y - 1, rival) && Check(x, y - 2, player))
                 {
-                    board[x, y] = player;
                     board[x, y - 1] = player;
-                    Refresh();
                     put = 1;
                 }
                 // 交替
                 if (put == 1)
                 {
+                    board[x, y] = player;
                     int p = player;
                     player = rival;
                     rival = p;
+                    Refresh();
                 }
             }
         }
