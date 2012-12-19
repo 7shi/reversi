@@ -63,6 +63,27 @@ namespace Reversi
                     board[x + 1, y] = 1;
                     Refresh();
                 }
+                // 左
+                if (board[x - 1, y] == 2 && board[x - 2, y] == 1)
+                {
+                    board[x, y] = 1;
+                    board[x - 1, y] = 1;
+                    Refresh();
+                }
+                // 下
+                if (board[x, y + 1] == 2 && board[x, y + 2] == 1)
+                {
+                    board[x, y] = 1;
+                    board[x, y + 1] = 1;
+                    Refresh();
+                }
+                // 上
+                if (board[x, y - 1] == 2 && board[x, y - 2] == 1)
+                {
+                    board[x, y] = 1;
+                    board[x, y - 1] = 1;
+                    Refresh();
+                }
             }
         }
     }
