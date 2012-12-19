@@ -82,6 +82,11 @@ namespace Reversi
                     int p = player;
                     player = rival;
                     rival = p;
+                    if (!CanPut())
+                    {
+                        rival = player;
+                        player = p;
+                    }
                     Refresh();
                 }
             }
