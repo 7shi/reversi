@@ -48,5 +48,18 @@ namespace Reversi
                 }
             }
         }
+
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            base.OnMouseDown(e);
+            int x = (e.X - 10) / 30;
+            int y = (e.Y - 10) / 30;
+            if (0 <= x && x <= 7 && 0 <= y && y <= 7)
+            {
+                board[x, y]++;
+                if (board[x, y] == 3) board[x, y] = 0;
+                Refresh();
+            }
+        }
     }
 }
