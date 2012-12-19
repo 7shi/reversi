@@ -37,24 +37,22 @@ namespace Reversi
             {
                 for (int x = 0; x <= 7; x++)
                 {
-                    if (board[x, y] == 1)
-                    {
-                        e.Graphics.FillEllipse(Brushes.Black, x * 30 + 11, y * 30 + 11, 28, 28);
-                    }
-                    else if (board[x, y] == 2)
-                    {
-                        e.Graphics.FillEllipse(Brushes.White, x * 30 + 11, y * 30 + 11, 28, 28);
-                    }
+                    DrawStone(e, board[x, y], x * 30 + 11, y * 30 + 11);
                 }
             }
             e.Graphics.DrawString("Turn", Font, Brushes.White, 262, 235);
-            if (player == 1)
+            DrawStone(e, player, 261, 201);
+        }
+
+        private static void DrawStone(PaintEventArgs e, int n, int x, int y)
+        {
+            if (n == 1)
             {
-                e.Graphics.FillEllipse(Brushes.Black, 261, 201, 28, 28);
+                e.Graphics.FillEllipse(Brushes.Black, x, y, 28, 28);
             }
-            else if (player == 2)
+            else if (n == 2)
             {
-                e.Graphics.FillEllipse(Brushes.White, 261, 201, 28, 28);
+                e.Graphics.FillEllipse(Brushes.White, x, y, 28, 28);
             }
         }
 
