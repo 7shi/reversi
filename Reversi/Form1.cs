@@ -17,7 +17,7 @@ namespace Reversi
         {
             InitializeComponent();
             Text = "リバーシ";
-            ClientSize = new Size(260, 260);
+            ClientSize = new Size(300, 260);
             BackColor = Color.Green;
             board[3, 3] = 2;
             board[4, 3] = 1;
@@ -46,6 +46,15 @@ namespace Reversi
                         e.Graphics.FillEllipse(Brushes.White, x * 30 + 11, y * 30 + 11, 28, 28);
                     }
                 }
+            }
+            e.Graphics.DrawString("Turn", Font, Brushes.White, 262, 235);
+            if (player == 1)
+            {
+                e.Graphics.FillEllipse(Brushes.Black, 261, 201, 28, 28);
+            }
+            else if (player == 2)
+            {
+                e.Graphics.FillEllipse(Brushes.White, 261, 201, 28, 28);
             }
         }
 
