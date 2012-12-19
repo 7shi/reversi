@@ -60,30 +60,10 @@ namespace Reversi
             if (Check(x, y, 0))
             {
                 int put = 0;
-                // 右
-                if (Check(x + 1, y, rival) && Check(x + 2, y, player))
-                {
-                    board[x + 1, y] = player;
-                    put = 1;
-                }
-                // 左
-                if (Check(x - 1, y, rival) && Check(x - 2, y, player))
-                {
-                    board[x - 1, y] = player;
-                    put = 1;
-                }
-                // 下
-                if (Check(x, y + 1, rival) && Check(x, y + 2, player))
-                {
-                    board[x, y + 1] = player;
-                    put = 1;
-                }
-                // 上
-                if (Check(x, y - 1, rival) && Check(x, y - 2, player))
-                {
-                    board[x, y - 1] = player;
-                    put = 1;
-                }
+                put = PutStone(x, y, 1, 0, put);   // 右
+                put = PutStone(x, y, -1, 0, put);  // 左
+                put = PutStone(x, y, 0, 1, put);   // 下
+                put = PutStone(x, y, 0, -1, put);  // 上
                 // 交替
                 if (put == 1)
                 {
@@ -94,6 +74,16 @@ namespace Reversi
                     Refresh();
                 }
             }
+        }
+
+        private int PutStone(int x, int y, int dx, int dy, int put)
+        {
+            if (Check(x + dx, y + dy, rival) && Check(x + dx * 2, y + dy * 2, player))
+            {
+                board[x + dx, y + dy] = player;
+                put = 1;
+            }
+            return put;
         }
 
         private bool Check(int x, int y, int n)
