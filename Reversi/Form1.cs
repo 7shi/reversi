@@ -89,6 +89,16 @@ namespace Reversi
 
         private int PutStone(int x, int y, int dx, int dy)
         {
+            int stone = CountStone(x, y, dx, dy);
+            for (int i = 1; i <= stone; i++)
+            {
+                board[x + dx * i, y + dy * i] = player;
+            }
+            return stone;
+        }
+
+        private int CountStone(int x, int y, int dx, int dy)
+        {
             int x1 = x + dx;
             int y1 = y + dy;
             int stone = 0;
@@ -98,18 +108,7 @@ namespace Reversi
                 y1 += dy;
                 stone++;
             }
-            if (stone > 0 && Check(x1, y1, player))
-            {
-                int x2 = x + dx;
-                int y2 = y + dy;
-                while (Check(x2, y2, rival))
-                {
-                    board[x2, y2] = player;
-                    x2 += dx;
-                    y2 += dy;
-                }
-            }
-            else
+            if (!Check(x1, y1, player))
             {
                 stone = 0;
             }
