@@ -64,6 +64,10 @@ namespace Reversi
                 put = PutStone(x, y, -1, 0, put);  // 左
                 put = PutStone(x, y, 0, 1, put);   // 下
                 put = PutStone(x, y, 0, -1, put);  // 上
+                put = PutStone(x, y, 1, 1, put);   // 右下
+                put = PutStone(x, y, 1, -1, put);  // 右上
+                put = PutStone(x, y, -1, 1, put);  // 左下
+                put = PutStone(x, y, -1, -1, put); // 左上
                 // 交替
                 if (put == 1)
                 {
