@@ -56,32 +56,34 @@ namespace Reversi
             int y = (e.Y - 10) / 30;
             if (Check(x, y, 0))
             {
+                int c1 = 1;
+                int c2 = 2;
                 // 右
-                if (Check(x + 1, y, 2) && Check(x + 2, y, 1))
+                if (Check(x + 1, y, c2) && Check(x + 2, y, c1))
                 {
-                    board[x, y] = 1;
-                    board[x + 1, y] = 1;
+                    board[x, y] = c1;
+                    board[x + 1, y] = c1;
                     Refresh();
                 }
                 // 左
-                if (Check(x - 1, y, 2) && Check(x - 2, y, 1))
+                if (Check(x - 1, y, c2) && Check(x - 2, y, c1))
                 {
-                    board[x, y] = 1;
-                    board[x - 1, y] = 1;
+                    board[x, y] = c1;
+                    board[x - 1, y] = c1;
                     Refresh();
                 }
                 // 下
-                if (Check(x, y + 1, 2) && Check(x, y + 2, 1))
+                if (Check(x, y + 1, c2) && Check(x, y + 2, c1))
                 {
-                    board[x, y] = 1;
-                    board[x, y + 1] = 1;
+                    board[x, y] = c1;
+                    board[x, y + 1] = c1;
                     Refresh();
                 }
                 // 上
-                if (Check(x, y - 1, 2) && Check(x, y - 2, 1))
+                if (Check(x, y - 1, c2) && Check(x, y - 2, c1))
                 {
-                    board[x, y] = 1;
-                    board[x, y - 1] = 1;
+                    board[x, y] = c1;
+                    board[x, y - 1] = c1;
                     Refresh();
                 }
             }
