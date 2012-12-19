@@ -82,9 +82,25 @@ namespace Reversi
 
         private int PutStone(int x, int y, int dx, int dy, int put)
         {
-            if (Check(x + dx, y + dy, rival) && Check(x + dx * 2, y + dy * 2, player))
+            int x1 = x + dx;
+            int y1 = y + dy;
+            int stone = 0;
+            while (Check(x1, y1, rival))
             {
-                board[x + dx, y + dy] = player;
+                x1 += dx;
+                y1 += dy;
+                stone++;
+            }
+            if (stone > 0 && Check(x1, y1, player))
+            {
+                int x2 = x + dx;
+                int y2 = y + dy;
+                while (Check(x2, y2, rival))
+                {
+                    board[x2, y2] = player;
+                    x2 += dx;
+                    y2 += dy;
+                }
                 put = 1;
             }
             return put;
