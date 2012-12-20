@@ -115,7 +115,18 @@ namespace Reversi
                         player = p;
                         if (!CanPut())
                         {
-                            message = "ゲーム終了！";
+                            if (black > white)
+                            {
+                                message = "黒の勝ち！";
+                            }
+                            else if (black < white)
+                            {
+                                message = "白の勝ち！";
+                            }
+                            else
+                            {
+                                message = "引き分け！";
+                            }
                         }
                     }
                     Refresh();
