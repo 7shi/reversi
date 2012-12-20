@@ -100,14 +100,39 @@ namespace Reversi
             {
                 if (PutStone(x, y) > 0)
                 {
-                    Change();
+                    int chg = Change();
                     Refresh();
+                    if (chg == 1)
+                    {
+                        chg = 2;
+                        while (chg == 2)
+                        {
+                            Think1();
+                            chg = Change();
+                            Refresh();
+                        }
+                    }
                 }
             }
             else
             {
                 Init();
                 Refresh();
+            }
+        }
+
+        Random rnd = new Random();
+
+        private void Think1()
+        {
+            for (; ; )
+            {
+                int x = rnd.Next(8);
+                int y = rnd.Next(8);
+                if (PutStone(x, y) > 0)
+                {
+                    return;
+                }
             }
         }
 
