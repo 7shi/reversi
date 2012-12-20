@@ -90,7 +90,6 @@ namespace Reversi
         }
 
         int player = 1;
-        int rival = 2;
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
@@ -101,13 +100,10 @@ namespace Reversi
             {
                 if (PutStone(x, y) > 0)
                 {
-                    int p = player;
-                    player = rival;
-                    rival = p;
+                    player = 3 - player;
                     if (!CanPut())
                     {
-                        rival = player;
-                        player = p;
+                        player = 3 - player;
                         if (!CanPut())
                         {
                             if (black > white)
@@ -208,7 +204,7 @@ namespace Reversi
             int x1 = x + dx;
             int y1 = y + dy;
             int stone = 0;
-            while (Check(x1, y1, rival))
+            while (Check(x1, y1, 3 - player))
             {
                 x1 += dx;
                 y1 += dy;
