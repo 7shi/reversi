@@ -100,26 +100,7 @@ namespace Reversi
             {
                 if (PutStone(x, y) > 0)
                 {
-                    player = 3 - player;
-                    if (!CanPut())
-                    {
-                        player = 3 - player;
-                        if (!CanPut())
-                        {
-                            if (black > white)
-                            {
-                                message = "黒の勝ち！";
-                            }
-                            else if (black < white)
-                            {
-                                message = "白の勝ち！";
-                            }
-                            else
-                            {
-                                message = "引き分け！";
-                            }
-                        }
-                    }
+                    Change();
                     Refresh();
                 }
             }
@@ -127,6 +108,30 @@ namespace Reversi
             {
                 Init();
                 Refresh();
+            }
+        }
+
+        private void Change()
+        {
+            player = 3 - player;
+            if (!CanPut())
+            {
+                player = 3 - player;
+                if (!CanPut())
+                {
+                    if (black > white)
+                    {
+                        message = "黒の勝ち！";
+                    }
+                    else if (black < white)
+                    {
+                        message = "白の勝ち！";
+                    }
+                    else
+                    {
+                        message = "引き分け！";
+                    }
+                }
             }
         }
 
