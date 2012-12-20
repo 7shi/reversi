@@ -195,6 +195,10 @@ namespace Reversi
                 stone += CountStone(x, y, 1, -1);  // 右上
                 stone += CountStone(x, y, -1, 1);  // 左下
                 stone += CountStone(x, y, -1, -1); // 左上
+                if (stone > 0)
+                {
+                    stone++;
+                }
             }
             return stone;
         }
