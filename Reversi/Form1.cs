@@ -90,47 +90,61 @@ namespace Reversi
             base.OnMouseDown(e);
             int x = (e.X - 10) / 30;
             int y = (e.Y - 10) / 30;
-            if (Check(x, y, 0))
+            if (message == "")
             {
-                int put = 0;
-                put += PutStone(x, y, 1, 0);   // 右
-                put += PutStone(x, y, -1, 0);  // 左
-                put += PutStone(x, y, 0, 1);   // 下
-                put += PutStone(x, y, 0, -1);  // 上
-                put += PutStone(x, y, 1, 1);   // 右下
-                put += PutStone(x, y, 1, -1);  // 右上
-                put += PutStone(x, y, -1, 1);  // 左下
-                put += PutStone(x, y, -1, -1); // 左上
-                // 交替
-                if (put > 0)
+                if (Check(x, y, 0))
                 {
-                    board[x, y] = player;
-                    CountStones();
-                    int p = player;
-                    player = rival;
-                    rival = p;
-                    if (!CanPut())
+                    int put = 0;
+                    put += PutStone(x, y, 1, 0);   // 右
+                    put += PutStone(x, y, -1, 0);  // 左
+                    put += PutStone(x, y, 0, 1);   // 下
+                    put += PutStone(x, y, 0, -1);  // 上
+                    put += PutStone(x, y, 1, 1);   // 右下
+                    put += PutStone(x, y, 1, -1);  // 右上
+                    put += PutStone(x, y, -1, 1);  // 左下
+                    put += PutStone(x, y, -1, -1); // 左上
+                    // 交替
+                    if (put > 0)
                     {
-                        rival = player;
-                        player = p;
+                        board[x, y] = player;
+                        CountStones();
+                        int p = player;
+                        player = rival;
+                        rival = p;
                         if (!CanPut())
                         {
-                            if (black > white)
+                            rival = player;
+                            player = p;
+                            if (!CanPut())
                             {
-                                message = "黒の勝ち！";
-                            }
-                            else if (black < white)
-                            {
-                                message = "白の勝ち！";
-                            }
-                            else
-                            {
-                                message = "引き分け！";
+                                if (black > white)
+                                {
+                                    message = "黒の勝ち！";
+                                }
+                                else if (black < white)
+                                {
+                                    message = "白の勝ち！";
+                                }
+                                else
+                                {
+                                    message = "引き分け！";
+                                }
                             }
                         }
+                        Refresh();
                     }
-                    Refresh();
                 }
+            }
+            else
+            {
+                message = "";
+                board = new int[8, 8];
+                board[3, 3] = 2;
+                board[4, 3] = 1;
+                board[3, 4] = 1;
+                board[4, 4] = 2;
+                CountStones();
+                Refresh();
             }
         }
 
