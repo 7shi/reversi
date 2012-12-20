@@ -109,7 +109,7 @@ namespace Reversi
                         while (chg == 2)
                         {
                             Thread.Sleep(200);
-                            Think1();
+                            Think2();
                             chg = Change();
                             Refresh();
                         }
@@ -135,6 +135,28 @@ namespace Reversi
                 {
                     return;
                 }
+            }
+        }
+
+        private void Think2()
+        {
+            int max = 0, tx = 0, ty = 0;
+            for (int y = 0; y <= 7; y++)
+            {
+                for (int x = 0; x <= 7; x++)
+                {
+                    int put = CountStone(x, y);
+                    if (max < put)
+                    {
+                        max = put;
+                        tx = x;
+                        ty = y;
+                    }
+                }
+            }
+            if (max > 0)
+            {
+                PutStone(tx, ty);
             }
         }
 
