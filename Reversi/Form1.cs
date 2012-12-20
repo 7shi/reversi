@@ -13,9 +13,11 @@ namespace Reversi
     {
         int[,] board;
         string message;
+        int player;
 
         private void Init()
         {
+            player = 1;
             message = "";
             board = new int[8, 8];
             board[3, 3] = 2;
@@ -88,8 +90,6 @@ namespace Reversi
                 e.Graphics.FillEllipse(Brushes.White, x, y, 28, 28);
             }
         }
-
-        int player = 1;
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
