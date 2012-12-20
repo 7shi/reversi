@@ -101,15 +101,7 @@ namespace Reversi
             {
                 if (Check(x, y, 0))
                 {
-                    int put = 0;
-                    put += PutStone(x, y, 1, 0);   // 右
-                    put += PutStone(x, y, -1, 0);  // 左
-                    put += PutStone(x, y, 0, 1);   // 下
-                    put += PutStone(x, y, 0, -1);  // 上
-                    put += PutStone(x, y, 1, 1);   // 右下
-                    put += PutStone(x, y, 1, -1);  // 右上
-                    put += PutStone(x, y, -1, 1);  // 左下
-                    put += PutStone(x, y, -1, -1); // 左上
+                    int put = PutStone(x, y);
                     // 交替
                     if (put > 0)
                     {
@@ -147,6 +139,20 @@ namespace Reversi
                 Init();
                 Refresh();
             }
+        }
+
+        private int PutStone(int x, int y)
+        {
+            int put = 0;
+            put += PutStone(x, y, 1, 0);   // 右
+            put += PutStone(x, y, -1, 0);  // 左
+            put += PutStone(x, y, 0, 1);   // 下
+            put += PutStone(x, y, 0, -1);  // 上
+            put += PutStone(x, y, 1, 1);   // 右下
+            put += PutStone(x, y, 1, -1);  // 右上
+            put += PutStone(x, y, -1, 1);  // 左下
+            put += PutStone(x, y, -1, -1); // 左上
+            return put;
         }
 
         private bool CanPut()
