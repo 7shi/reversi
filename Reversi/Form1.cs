@@ -11,8 +11,19 @@ namespace Reversi
 {
     public partial class Form1 : Form
     {
-        int[,] board = new int[8, 8];
-        string message = "";
+        int[,] board;
+        string message;
+
+        private void Init()
+        {
+            message = "";
+            board = new int[8, 8];
+            board[3, 3] = 2;
+            board[4, 3] = 1;
+            board[3, 4] = 1;
+            board[4, 4] = 2;
+            CountStones();
+        }
 
         public Form1()
         {
@@ -20,11 +31,7 @@ namespace Reversi
             Text = "リバーシ";
             ClientSize = new Size(300, 260);
             BackColor = Color.Green;
-            board[3, 3] = 2;
-            board[4, 3] = 1;
-            board[3, 4] = 1;
-            board[4, 4] = 2;
-            CountStones();
+            Init();
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -137,13 +144,7 @@ namespace Reversi
             }
             else
             {
-                message = "";
-                board = new int[8, 8];
-                board[3, 3] = 2;
-                board[4, 3] = 1;
-                board[3, 4] = 1;
-                board[4, 4] = 2;
-                CountStones();
+                Init();
                 Refresh();
             }
         }
