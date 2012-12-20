@@ -92,6 +92,21 @@ namespace Reversi
             }
         }
 
+        private bool CanPut()
+        {
+            for (int y = 0; y <= 7; y++)
+            {
+                for (int x = 0; x <= 7; x++)
+                {
+                    if (CountStone(x, y) > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         private int PutStone(int x, int y, int dx, int dy)
         {
             int stone = CountStone(x, y, dx, dy);
