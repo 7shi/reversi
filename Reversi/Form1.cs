@@ -43,11 +43,11 @@ namespace Reversi
             {
                 for (int x = 0; x <= 7; x++)
                 {
-                    if (CountStone(x, y) > 0)
-                    {
-                        e.Graphics.FillRectangle(Brushes.Yellow,
-                            x * 30 + 10, y * 30 + 10, 30, 30);
-                    }
+                    //if (CountStone(x, y) > 0)
+                    //{
+                    //    e.Graphics.FillRectangle(Brushes.Yellow,
+                    //        x * 30 + 10, y * 30 + 10, 30, 30);
+                    //}
                     DrawStone(e, board[x, y], x * 30 + 11, y * 30 + 11);
                 }
             }
