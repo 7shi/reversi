@@ -24,13 +24,12 @@ namespace Reversi
             board[4, 3] = 1;
             board[3, 4] = 1;
             board[4, 4] = 2;
+            CountStones();
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            int black = 0;
-            int white = 0;
             for (int y = 0; y <= 7; y++)
             {
                 for (int x = 0; x <= 7; x++)
@@ -39,14 +38,6 @@ namespace Reversi
                     {
                         e.Graphics.FillRectangle(Brushes.Yellow,
                             x * 30 + 10, y * 30 + 10, 30, 30);
-                    }
-                    if (board[x, y] == 1)
-                    {
-                        black++;
-                    }
-                    else if (board[x, y] == 2)
-                    {
-                        white++;
                     }
                     DrawStone(e, board[x, y], x * 30 + 11, y * 30 + 11);
                 }
@@ -114,6 +105,7 @@ namespace Reversi
                 if (put > 0)
                 {
                     board[x, y] = player;
+                    CountStones();
                     int p = player;
                     player = rival;
                     rival = p;
@@ -194,6 +186,28 @@ namespace Reversi
         private bool Check(int x, int y, int n)
         {
             return 0 <= x && x <= 7 && 0 <= y && y <= 7 && board[x, y] == n;
+        }
+
+        int black, white;
+
+        private void CountStones()
+        {
+            black = 0;
+            white = 0;
+            for (int y = 0; y <= 7; y++)
+            {
+                for (int x = 0; x <= 7; x++)
+                {
+                    if (board[x, y] == 1)
+                    {
+                        black++;
+                    }
+                    else if (board[x, y] == 2)
+                    {
+                        white++;
+                    }
+                }
+            }
         }
     }
 }
