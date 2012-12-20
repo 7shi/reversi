@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Reversi
 {
@@ -107,6 +108,7 @@ namespace Reversi
                         chg = 2;
                         while (chg == 2)
                         {
+                            Thread.Sleep(200);
                             Think1();
                             chg = Change();
                             Refresh();
