@@ -111,13 +111,21 @@ namespace Reversi
             }
         }
 
-        private void Change()
+        private int Change()
         {
             player = 3 - player;
-            if (!CanPut())
+            if (CanPut())
+            {
+                return 1; // 交替
+            }
+            else
             {
                 player = 3 - player;
-                if (!CanPut())
+                if (CanPut())
+                {
+                    return 2; // パス
+                }
+                else
                 {
                     if (black > white)
                     {
@@ -131,6 +139,7 @@ namespace Reversi
                     {
                         message = "引き分け！";
                     }
+                    return 3; // 終了
                 }
             }
         }
