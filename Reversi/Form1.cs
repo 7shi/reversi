@@ -46,13 +46,25 @@ namespace Reversi
                 e.Graphics.DrawLine(Pens.Black, i * 30 + 10, 10, i * 30 + 10, 250);
                 e.Graphics.DrawLine(Pens.Black, 10, i * 30 + 10, 250, i * 30 + 10);
             }
-            e.Graphics.DrawString("Turn", Font, Brushes.White, 262, 235);
+            e.Graphics.DrawString("Turn", Font, Brushes.White,
+                new Rectangle(250, 230, 50, 30),
+                new StringFormat
+                {
+                    Alignment = StringAlignment.Center,
+                    LineAlignment = StringAlignment.Center
+                });
             DrawStone(e, player, 261, 201);
             if (message != "")
             {
                 e.Graphics.FillRectangle(Brushes.White, 20, 120, 220, 20);
                 e.Graphics.DrawRectangle(Pens.Red, 20, 120, 220, 20);
-                e.Graphics.DrawString(message, Font, Brushes.Black, 30, 125);
+                e.Graphics.DrawString(message, Font, Brushes.Black,
+                    new Rectangle(20, 120, 220, 20),
+                    new StringFormat
+                    {
+                        Alignment = StringAlignment.Center,
+                        LineAlignment = StringAlignment.Center
+                    });
             }
         }
 
