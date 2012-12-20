@@ -29,6 +29,8 @@ namespace Reversi
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
+            int black = 0;
+            int white = 0;
             for (int y = 0; y <= 7; y++)
             {
                 for (int x = 0; x <= 7; x++)
@@ -37,6 +39,14 @@ namespace Reversi
                     {
                         e.Graphics.FillRectangle(Brushes.Yellow,
                             x * 30 + 10, y * 30 + 10, 30, 30);
+                    }
+                    if (board[x, y] == 1)
+                    {
+                        black++;
+                    }
+                    else if (board[x, y] == 2)
+                    {
+                        white++;
                     }
                     DrawStone(e, board[x, y], x * 30 + 11, y * 30 + 11);
                 }
@@ -54,6 +64,12 @@ namespace Reversi
             e.Graphics.DrawString("Turn", Font, Brushes.White,
                 new Rectangle(250, 230, 50, 30), sf);
             DrawStone(e, player, 261, 201);
+            DrawStone(e, 1, 261, 11);
+            e.Graphics.DrawString(black.ToString(), Font, Brushes.Black,
+                new Rectangle(250, 40, 50, 30), sf);
+            DrawStone(e, 2, 261, 71);
+            e.Graphics.DrawString(white.ToString(), Font, Brushes.White,
+                new Rectangle(250, 100, 50, 30), sf);
             if (message != "")
             {
                 var r = new Rectangle(20, 120, 220, 20);
