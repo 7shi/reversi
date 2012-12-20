@@ -28,17 +28,22 @@ namespace Reversi
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            for (int i = 0; i <= 8; i++)
-            {
-                e.Graphics.DrawLine(Pens.Black, i * 30 + 10, 10, i * 30 + 10, 250);
-                e.Graphics.DrawLine(Pens.Black, 10, i * 30 + 10, 250, i * 30 + 10);
-            }
             for (int y = 0; y <= 7; y++)
             {
                 for (int x = 0; x <= 7; x++)
                 {
+                    if (CountStone(x, y) > 0)
+                    {
+                        e.Graphics.FillRectangle(Brushes.Yellow,
+                            x * 30 + 10, y * 30 + 10, 30, 30);
+                    }
                     DrawStone(e, board[x, y], x * 30 + 11, y * 30 + 11);
                 }
+            }
+            for (int i = 0; i <= 8; i++)
+            {
+                e.Graphics.DrawLine(Pens.Black, i * 30 + 10, 10, i * 30 + 10, 250);
+                e.Graphics.DrawLine(Pens.Black, 10, i * 30 + 10, 250, i * 30 + 10);
             }
             e.Graphics.DrawString("Turn", Font, Brushes.White, 262, 235);
             DrawStone(e, player, 261, 201);
