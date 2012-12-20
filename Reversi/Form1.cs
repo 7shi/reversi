@@ -97,6 +97,23 @@ namespace Reversi
             return stone;
         }
 
+        private int CountStone(int x, int y)
+        {
+            int stone = 0;
+            if (Check(x, y, 0))
+            {
+                stone += CountStone(x, y, 1, 0);   // 右
+                stone += CountStone(x, y, -1, 0);  // 左
+                stone += CountStone(x, y, 0, 1);   // 下
+                stone += CountStone(x, y, 0, -1);  // 上
+                stone += CountStone(x, y, 1, 1);   // 右下
+                stone += CountStone(x, y, 1, -1);  // 右上
+                stone += CountStone(x, y, -1, 1);  // 左下
+                stone += CountStone(x, y, -1, -1); // 左上
+            }
+            return stone;
+        }
+
         private int CountStone(int x, int y, int dx, int dy)
         {
             int x1 = x + dx;
