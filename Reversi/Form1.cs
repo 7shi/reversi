@@ -206,6 +206,10 @@ namespace Reversi
             {
                 PutStone(tx, ty);
             }
+            else
+            {
+                Think2();
+            }
         }
 
         private int Change()
