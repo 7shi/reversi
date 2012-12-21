@@ -171,32 +171,20 @@ namespace Reversi
             int max = 0, tx = 0, ty = 0;
             for (int i = 1; i <= 1000; i++)
             {
-                int x1 = -1, y1 = -1;
-                for (; ; )
+                var pt = Think1();
+                while (Change() != 3)
                 {
-                    int x2 = rnd.Next(8);
-                    int y2 = rnd.Next(8);
-                    if (PutStone(x2, y2) > 0)
-                    {
-                        if (x1 < 0)
-                        {
-                            x1 = x2;
-                            y1 = y2;
-                        }
-                        if (Change() == 3)
-                        {
-                            break;
-                        }
-                    }
+                    Think1();
                 }
                 if ((p == 1 && black > white) || (p == 2 && black < white))
                 {
-                    win[x1, y1]++;
-                    if (max < win[x1, y1])
+                    int x = pt.Item1, y = pt.Item2;
+                    win[x, y]++;
+                    if (max < win[x, y])
                     {
-                        max = win[x1, y1];
-                        tx = x1;
-                        ty = y1;
+                        max = win[x, y];
+                        tx = x;
+                        ty = y;
                     }
                 }
                 Array.Copy(bak, board, 8 * 8);
@@ -210,7 +198,7 @@ namespace Reversi
             }
             else
             {
-                Think2();
+                Think1();
             }
         }
 
