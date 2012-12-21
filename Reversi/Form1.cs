@@ -98,33 +98,22 @@ namespace Reversi
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
-            int x = (e.X - 10) / 30;
-            int y = (e.Y - 10) / 30;
-            if (message == "")
+            Init();
+            Refresh();
+            while (message == "")
             {
-                if (PutStone(x, y) > 0)
+                var t1 = DateTime.Now;
+                if (player == 1)
                 {
-                    int chg = Change();
-                    Refresh();
-                    if (chg == 1)
-                    {
-                        chg = 2;
-                        while (chg == 2)
-                        {
-                            //Thread.Sleep(200);
-                            var t1 = DateTime.Now;
-                            Think3();
-                            int ms = (int)(DateTime.Now - t1).TotalMilliseconds;
-                            time = ms + "ms";
-                            chg = Change();
-                            Refresh();
-                        }
-                    }
+                    Think3(1000, 1, 0);
                 }
-            }
-            else
-            {
-                Init();
+                else
+                {
+                    Think3(2000, 1, 5);
+                }
+                int ms = (int)(DateTime.Now - t1).TotalMilliseconds;
+                time = ms + "ms";
+                Change();
                 Refresh();
             }
         }
@@ -168,13 +157,13 @@ namespace Reversi
             }
         }
 
-        private void Think3()
+        private void Think3(int loop, int w, int l)
         {
             int p = player;
             int[,] win = new int[8, 8];
             int[,] bak = new int[8, 8];
             Array.Copy(board, bak, 8 * 8);
-            for (int i = 1; i <= 3000; i++)
+            for (int i = 1; i <= loop; i++)
             {
                 var pt = Think1();
                 while (Change() != 3)
@@ -184,11 +173,11 @@ namespace Reversi
                 int x = pt.Item1, y = pt.Item2;
                 if ((p == 1 && black > white) || (p == 2 && black < white))
                 {
-                    win[x, y]++;
+                    win[x, y] += w;
                 }
                 else
                 {
-                    win[x, y] -= 2;
+                    win[x, y] -= l;
                 }
                 Array.Copy(bak, board, 8 * 8);
                 player = p;
