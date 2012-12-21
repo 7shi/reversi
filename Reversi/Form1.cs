@@ -13,13 +13,14 @@ namespace Reversi
     public partial class Form1 : Form
     {
         int[,] board;
-        string message;
+        string message, time;
         int player;
 
         private void Init()
         {
             player = 1;
             message = "";
+            time = "";
             board = new int[8, 8];
             board[3, 3] = 2;
             board[4, 3] = 1;
@@ -78,6 +79,8 @@ namespace Reversi
                 e.Graphics.DrawRectangle(Pens.Red, r);
                 e.Graphics.DrawString(message, Font, Brushes.Black, r, sf);
             }
+            e.Graphics.DrawString(time, Font, Brushes.Black,
+                new Rectangle(250, 160, 50, 30), sf);
         }
 
         private static void DrawStone(PaintEventArgs e, int n, int x, int y)
@@ -108,8 +111,11 @@ namespace Reversi
                         chg = 2;
                         while (chg == 2)
                         {
-                            Thread.Sleep(200);
+                            //Thread.Sleep(200);
+                            var t1 = DateTime.Now;
                             Think3();
+                            int ms = (int)(DateTime.Now - t1).TotalMilliseconds;
+                            time = ms + "ms";
                             chg = Change();
                             Refresh();
                         }
