@@ -79,8 +79,11 @@ namespace Reversi
                 e.Graphics.DrawRectangle(Pens.Red, r);
                 e.Graphics.DrawString(message, Font, Brushes.Black, r, sf);
             }
-            e.Graphics.DrawString(time, Font, Brushes.Black,
-                new Rectangle(250, 160, 50, 30), sf);
+            //e.Graphics.DrawString(time, Font, Brushes.Black,
+            //    new Rectangle(250, 160, 50, 30), sf);
+            e.Graphics.DrawString("試:" + w0, Font, Brushes.Black, 260, 140);
+            e.Graphics.DrawString("白:" + w1, Font, Brushes.Black, 260, 160);
+            e.Graphics.DrawString("黒:" + w2, Font, Brushes.Black, 260, 180);
         }
 
         private static void DrawStone(PaintEventArgs e, int n, int x, int y)
@@ -95,26 +98,53 @@ namespace Reversi
             }
         }
 
+        int w0, w1, w2;
+        bool stop = true;
+
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
-            Init();
-            Refresh();
-            while (message == "")
+            if (!stop)
             {
-                var t1 = DateTime.Now;
-                if (player == 1)
-                {
-                    Think3(1000, 1, 0);
-                }
-                else
-                {
-                    Think3(2000, 1, 5);
-                }
-                int ms = (int)(DateTime.Now - t1).TotalMilliseconds;
-                time = ms + "ms";
-                Change();
+                stop = true;
+                return;
+            }
+            stop = false;
+            for (; ; )
+            {
+                Init();
                 Refresh();
+                while (message == "")
+                {
+                    var t1 = DateTime.Now;
+                    if (player == 1)
+                    {
+                        Think3(1000, 1, 0);
+                    }
+                    else
+                    {
+                        Think3(5000, 1, 0);
+                    }
+                    int ms = (int)(DateTime.Now - t1).TotalMilliseconds;
+                    time = ms + "ms";
+                    Change();
+                    Invalidate();
+                    Application.DoEvents();
+                    if (stop || !Visible)
+                    {
+                        return;
+                    }
+                }
+                w0++;
+                if (black > white)
+                {
+                    w1++;
+                }
+                else if (black < white)
+                {
+                    w2++;
+                }
+                Console.WriteLine("{0}: {1} - {2}", w0, w1, w2);
             }
         }
 
