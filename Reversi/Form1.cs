@@ -109,7 +109,7 @@ namespace Reversi
                         while (chg == 2)
                         {
                             Thread.Sleep(200);
-                            Think2();
+                            Think3();
                             chg = Change();
                             Refresh();
                         }
@@ -154,6 +154,54 @@ namespace Reversi
                     }
                 }
             }
+            if (max > 0)
+            {
+                PutStone(tx, ty);
+            }
+        }
+
+        private void Think3()
+        {
+            int p = player;
+            int[,] win = new int[8, 8];
+            int[,] bak = new int[8, 8];
+            Array.Copy(board, bak, 8 * 8);
+            int max = 0, tx = 0, ty = 0;
+            for (int i = 1; i <= 1000; i++)
+            {
+                int x1 = -1, y1 = -1;
+                for (; ; )
+                {
+                    int x2 = rnd.Next(8);
+                    int y2 = rnd.Next(8);
+                    if (PutStone(x2, y2) > 0)
+                    {
+                        if (x1 < 0)
+                        {
+                            x1 = x2;
+                            y1 = y2;
+                        }
+                        if (Change() == 3)
+                        {
+                            break;
+                        }
+                    }
+                }
+                if ((p == 1 && black > white) || (p == 2 && black < white))
+                {
+                    win[x1, y1]++;
+                    if (max < win[x1, y1])
+                    {
+                        max = win[x1, y1];
+                        tx = x1;
+                        ty = y1;
+                    }
+                }
+                Array.Copy(bak, board, 8 * 8);
+                player = p;
+            }
+            message = "";
+            CountStones();
             if (max > 0)
             {
                 PutStone(tx, ty);
