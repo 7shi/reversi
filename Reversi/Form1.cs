@@ -174,31 +174,41 @@ namespace Reversi
             int[,] win = new int[8, 8];
             int[,] bak = new int[8, 8];
             Array.Copy(board, bak, 8 * 8);
-            int max = 0, tx = 0, ty = 0;
-            for (int i = 1; i <= 1000; i++)
+            for (int i = 1; i <= 3000; i++)
             {
                 var pt = Think1();
                 while (Change() != 3)
                 {
                     Think1();
                 }
+                int x = pt.Item1, y = pt.Item2;
                 if ((p == 1 && black > white) || (p == 2 && black < white))
                 {
-                    int x = pt.Item1, y = pt.Item2;
                     win[x, y]++;
-                    if (max < win[x, y])
-                    {
-                        max = win[x, y];
-                        tx = x;
-                        ty = y;
-                    }
+                }
+                else
+                {
+                    win[x, y] -= 2;
                 }
                 Array.Copy(bak, board, 8 * 8);
                 player = p;
             }
             message = "";
             CountStones();
-            if (max > 0)
+            int max = int.MinValue, tx = 0, ty = 0;
+            for (int y = 0; y <= 7; y++)
+            {
+                for (int x = 0; x <= 7; x++)
+                {
+                    if (max < win[x, y] && CountStone(x, y) > 0)
+                    {
+                        max = win[x, y];
+                        tx = x;
+                        ty = y;
+                    }
+                }
+            }
+            if (max > int.MinValue)
             {
                 PutStone(tx, ty);
             }
