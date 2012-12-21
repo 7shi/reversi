@@ -125,17 +125,19 @@ namespace Reversi
 
         Random rnd = new Random();
 
-        private void Think1()
+        private Tuple<int, int> Think1()
         {
+            int x, y;
             for (; ; )
             {
-                int x = rnd.Next(8);
-                int y = rnd.Next(8);
+                x = rnd.Next(8);
+                y = rnd.Next(8);
                 if (PutStone(x, y) > 0)
                 {
-                    return;
+                    break;
                 }
             }
+            return Tuple.Create(x, y);
         }
 
         private void Think2()
